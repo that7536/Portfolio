@@ -51,4 +51,8 @@ https://docs.google.com/spreadsheets/d/15ldZd54ZJDi-zogqcFFKh-YAul174METv_bFVxSl
 
 ## 使用素材
 　（背景画像挿入予定）
+<<<<<<< HEAD
 - 外部サービスの画像素材・音声素材を使用した場合、必ずサービス名とURLを明記します。
+=======
+- 外部サービスの画像素材・音声素材を使用した場合、必ずサービス名とURLを明記します。
+>>>>>>> remotes/origin/main
