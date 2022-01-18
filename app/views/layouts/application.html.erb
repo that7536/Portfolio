@@ -19,12 +19,14 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
-              <li><%= link_to ' トップへ',user_path(current_user),class: 'fas fa-home nav-link text-light' %></li>
-              <li><%= link_to ' ログアウト', destroy_user_session_path, method: :delete,class: 'fas fa-sign-out-alt nav-link text-light' %></li>
+              <li><%= link_to 'マイページへ',user_path(current_user),class: 'fas fa-home nav-link text-light' %></li>
+              <li><%= link_to '新規投稿',new_text_path,class: 'fas fa-home nav-link text-light' %></li>
+              <li><%= link_to '保存した投稿',bookmarks_path,class: 'fas fa-home nav-link text-light' %></li>
+              <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: 'fas fa-sign-out-alt nav-link text-light' %></li>
             <% else %>
-              <li><%= link_to ' トップへ',root_path,class: 'fas fa-home nav-link text-light' %></li>
-              <li><%= link_to ' 新規登録', new_user_registration_path,class: 'fas fa-user-plus nav-link text-light' %></li>
-              <li><%= link_to ' ログイン', new_user_session_path ,class: 'fas fa-sign-in-alt nav-link text-light'%></li>
+              <li><%= link_to 'トップへ',root_path,class: 'fas fa-home nav-link text-light' %></li>
+              <li><%= link_to '新規登録', new_user_registration_path,class: 'fas fa-user-plus nav-link text-light' %></li>
+              <li><%= link_to 'ログイン', new_user_session_path ,class: 'fas fa-sign-in-alt nav-link text-light'%></li>
             <% end %>
             </ul>
           </div>

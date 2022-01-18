@@ -1,5 +1,7 @@
 class Text < ApplicationRecord
 
+  attachment :image
+
   has_many :bookmarks, dependent: :destroy
 
   has_many :comments, dependent: :destroy
