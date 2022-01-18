@@ -1,4 +1,4 @@
 class Tag < ApplicationRecord
-  
-  has_many :texts, dependent: :destroy
+
+  #has_many :texts, dependent: :destroy
 end

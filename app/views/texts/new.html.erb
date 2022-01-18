@@ -8,11 +8,11 @@
     <%= f.label :text %>
     <%= f.text_area :text %>
   </div>
-  <!--div class="form-group"-->
-    <!--%= f.attachment_field :profileimage_id%>
-  </div-->
   <div class="form-group">
-    <%= f.submit class: 'btn btn-success' %>
+    <%= f.attachment_field :profileimage %>
+  </div>
+  <div class="form-group">
+    <%= f.submit '投稿する' %>
   </div>
 <% end %>
 
