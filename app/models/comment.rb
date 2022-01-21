@@ -1,6 +1,6 @@
 class Comment < ApplicationRecord
-  
-  belongs_to :users
-  
-  belongs_to :texts
+
+  belongs_to :user
+
+  belongs_to :text
 end

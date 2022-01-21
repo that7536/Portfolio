@@ -1,2 +1,27 @@
 <h1>ブックマーク一覧</h1>
-<%= render 'texts/index',texts: @texts, user: current_user %>
+<% @texts.each do |text| %>
+    <% if text.bookmarks.blank? %>
+<!--url:https://qiita.com/somewhatgood@github/items/b74107480ee3821784e6-->
+    <% else %>
+    <%# binding.pry %>
+      <tr id="text_<%= text.id %>">
+        <td><%= link_to text_path(text.id) do %>
+          <%= attachment_image_tag(text.user, :image, :fill, 50, 50, fallback: "no-image-icon.jpg") %>
+          <% end %>
+        </td>
+        <td><%= link_to text.title, text_path(text), class: "text_#{text.id}" %></td>
+        <td><%= text.text %></td>
+        <td><%= text.comments.count %>件のコメント</td>
+        <td>
+          <!--ブックマーク登録・解除-->
+            <%# if user.bookmarks.where(text_id:text.id).present? %>
+          <%# binding.pry %>
+              <%= link_to "ブックマークから削除", text_bookmark_path(text.id, text.user_id), method: :delete %>
+            <%# else %>
+              <%#= link_to "ブックマークに保存", text_bookmarks_path(text.id), method: :post %>
+            <%# end %>
+        </td>
+      </tr>
+    <% end %>
+
+<% end %>

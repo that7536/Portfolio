@@ -13,11 +13,12 @@ Rails.application.routes.draw do
   get 'users/withdraw'
 
   resources :texts,only: [:new,:create,:show,:edit,:destroy] do
-      resources :bookmarks,only: [:create,:destroy]
+    resources :bookmarks,only: [:create,:destroy]
+    resources :comments, only: [:create, :destroy]
   end
   resources :bookmarks,only: [:index]
 
-
+  get '/search', to: 'searchs#search'
 
   get 'tags/create'
   get 'tags/destroy'

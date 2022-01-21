@@ -2,10 +2,12 @@ class BookmarksController < ApplicationController
   def index
     #@texts = current_user.texts.find(params[:text_id])
     #@user =  @user = User.find(params[:user_id])
-    @texts = Text.where(id: current_user.bookmarks.pluck(:id))
-    #↑wherh:中にあるすべてのデータを取得する
-    #↑↑pluck:指定したカラムの値を配列で返してくれる
-    #つまりcurrent_userが保存したデータをpluckで回収してwhereで全部出してくる(みたいなイメージ)
+   # @texts = Text.where(id: current_user.bookmarks.pluck(:id))
+    #@texts = current_user.bookmarks
+    @texts = Text.all
+    #binding.pry
+
+
   end
 
   def create
@@ -20,5 +22,15 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
+
+    bookmark = Bookmark.find_by(user_id: params[:id], text_id: params[:text_id])
+    bookmark.destroy
+    redirect_back(fallback_location: root_path)
+  end
+
+  private
+
+  def bookmark_params
+    params.require(:bookmark).permit(:text_id)
   end
 end

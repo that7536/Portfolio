@@ -1,6 +1,6 @@
 class Text < ApplicationRecord
 
-  attachment :profileimage#（_idは含めません）
+  attachment :image#（_idは含めません）
 
   has_many :bookmarks, dependent: :destroy
 
@@ -10,6 +10,8 @@ class Text < ApplicationRecord
 
   belongs_to :user
 
-
+  def self.search(keyword)
+    where(["title like? OR body like?", "%#{keyword}%", "%#{keyword}%"])
+  end
 
 end

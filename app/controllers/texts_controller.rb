@@ -16,6 +16,8 @@ class TextsController < ApplicationController
   def show
     @text = Text.find(params[:id])
     @user = @text.user
+    @comment = Comment.new
+    #@comments = @text.comment
   end
 
   def edit
@@ -32,11 +34,17 @@ class TextsController < ApplicationController
     @text.destroy
     redirect_to user_path(current_user)
   end
+  
+  def search
+    @posts = Post.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "index"
+  end
 
   private
 
   def text_params
-    params.require(:text).permit(:title, :text, :profileimage_id)
+    params.require(:text).permit(:title, :text, :image)
   end
 
 end
