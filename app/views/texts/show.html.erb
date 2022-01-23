@@ -1,23 +1,33 @@
-<h1>Texts#show</h1>
+<h1><%= @text.title %></h1>
 <table class='table'>
   <tr id="text_<%= @text.id %>">
-    <td><%= link_to user_path(@text.user) do %>
+    <td>
       <%= attachment_image_tag(@text, :image, :size =>'400x300', fallback: "no-image-icon.jpg") %><br>
-      <%= @text.user.name %>
-      <% end %>
     </td>
-    <td><%= link_to @text.title, text_path(@text) %></td>
+    <td>
+      <%= link_to @user.name, user_path(@user) %>
+      <%= attachment_image_tag(@user, :profileimage, :size =>'200x200', fallback: "no-image-icon.jpg") %>
+    </td>
     <td><%= @text.text %></td>
     <td>コメント数：<%= @text.comments.count %></td>
     <td>
       <% @text.comments.each do |comment| %>
-        <p><!--%= image_tag('sample-author1.jpg') %--><%= comment.user.name %></p>
-        <p><%= comment.created_at.strftime('%Y/%m/%d') %><%= comment %></p>
+        <p><%= attachment_image_tag(comment.user, :profileimage, :size =>'100x100', fallback: "no-image-icon.jpg") %><%= comment.user.name %><%= comment.created_at.strftime('%Y/%m/%d') %></p>
+        <p><%= comment.comment %></p>
+        <% if comment.user_id == current_user.id %>
+          <td><%= link_to 'コメントを削除する', text_comment_path(comment.text, comment), method: :delete %></td>
+        <% end %>
+      <% end %>
+    </td>
+    <td>
+      <p>関連タグ</p>
+      <% @text.tags.each do |tag| %>
+        <p><%= link_to tag.name %></p>
       <% end %>
     </td>
     <% if @text.user.id == current_user.id %>
-      <td><%= link_to 'Edit', edit_text_path(@text) %></td>
-      <td><%= link_to 'Destroy', text_path(@text), method: :delete, data: { confirm: '本当に消しますか？' } %></td>
+      <td><%= link_to '投稿を編集する', edit_text_path(@text) %></td>
+      <td><%= link_to '投稿削除', text_path(@text), method: :delete, data: { confirm: '本当に消しますか？' } %></td>
     <% end %>
     <td>
       <%= form_with(model:[@text,@comment], local: true) do |f| %>

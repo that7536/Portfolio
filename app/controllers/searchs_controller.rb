@@ -30,7 +30,7 @@ class SearchsController < ApplicationController
         Text.where('title LIKE ?', '%'+content+'%')
       end
     # モデルがtag
-    elsif model == 'Tag'
+    elsif model == 'tag'
       if method == 'perfect'
         Tag.where(name: content)
       else

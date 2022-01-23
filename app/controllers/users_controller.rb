@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :ensure_correct_user, only: [:update]
+
 
   def show
     @user = User.find(params[:id])
@@ -9,9 +9,17 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = current_user
   end
 
   def update
+    @user = current_user
+    if @user.update(user_params)
+      redirect_to user_path(@user), notice: "編集完了"
+    else
+      @user = current_user
+      render "edit"
+    end
   end
 
   def unsubscrube
@@ -21,6 +29,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :profileimage)
+    params.require(:user).permit(:name, :profileimage, :introduction)
   end
 end

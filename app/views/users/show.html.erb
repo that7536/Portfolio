@@ -1,7 +1,11 @@
 <div>
   <tr>
-    <td><!--く%= attachment_image_tag(@users, :profileimage_id, :fill, 50, 50, fallback: "no-image-icon.jpg") %>--></td>
-    <td><%= link_to 'user.name', user_path(@user) %></td>
+    <%= attachment_image_tag(@user, :profileimage, :size =>'200x200', fallback: "no-image-icon.jpg") %>
+  </tr>
+  <tr>
+    <td></td>
+    <td><%= link_to @user.name, user_path(@user) %></td>
+    <td><%= @user.introduction %></td>
     <td>follow:<%= @user.followings.count %></td>
     <td>follower:<%= @user.followers.count %></td>
   </tr>
@@ -12,6 +16,9 @@
     <% else %>
       <%= link_to "フォローする", user_relationships_path(@user.id), method: :post %>
     <% end %>
+  <% end %>
+  <% if @user == current_user %>
+    <%= link_to 'ユーザー設定', edit_user_path(@user) %>
   <% end %>
 </div>
 <h2>投稿</h2>

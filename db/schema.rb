@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_16_073545) do
+ActiveRecord::Schema.define(version: 2022_01_22_085544) do
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id"
@@ -40,6 +40,16 @@ ActiveRecord::Schema.define(version: 2022_01_16_073545) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "text_tags", force: :cascade do |t|
+    t.integer "text_id"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_text_tags_on_tag_id"
+    t.index ["text_id", "tag_id"], name: "index_text_tags_on_text_id_and_tag_id", unique: true
+    t.index ["text_id"], name: "index_text_tags_on_text_id"
+  end
+
   create_table "texts", force: :cascade do |t|
     t.string "title"
     t.text "text"
@@ -48,6 +58,7 @@ ActiveRecord::Schema.define(version: 2022_01_16_073545) do
     t.integer "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "comment_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,6 +71,7 @@ ActiveRecord::Schema.define(version: 2022_01_16_073545) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "profileimage_id"
+    t.text "introduction"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -6,11 +6,22 @@ class TextsController < ApplicationController
   def create
     @text = Text.new(text_params)
     @text.user_id = current_user.id
-    if @text.save!
+    if !params[:text][:tag].nil?
+      tag_list = params[:text][:tag].split(',')#,(カンマ)があれば"文字"を分割することができる
+    else
+      tag_list = []
+    end
+    if @text.save
+      @text.save_tag(tag_list)
       redirect_to user_path(current_user), notice: "新規投稿完了！"
     else
       render 'texts/new'
     end
+
+  end
+
+  def index
+    @text = text.all
   end
 
   def show
@@ -29,12 +40,29 @@ class TextsController < ApplicationController
     end
   end
 
+  def update
+    @text = Text.find(params[:id])
+    if !params[:text][:tag].nil?
+      tag_list = params[:text][:tag].split(',')
+    else
+      tag_list = []
+    end
+    if @text.update(text_params)
+      @text.tags.delete_all
+      @text.save_tag(tag_list)
+      redirect_to text_path(@text), notice: "編集完了"
+    else
+      @text = Text.find(params[:id])
+      render "edit"
+    end
+  end
+
   def destroy
     @text = Text.find(params[:id])
     @text.destroy
     redirect_to user_path(current_user)
   end
-  
+
   def search
     @posts = Post.search(params[:keyword])
     @keyword = params[:keyword]
@@ -44,7 +72,7 @@ class TextsController < ApplicationController
   private
 
   def text_params
-    params.require(:text).permit(:title, :text, :image)
+    params.require(:text).permit(:title, :text, :image, :comment)
   end
 
 end

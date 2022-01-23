@@ -1,15 +1,19 @@
 <h1>新しく投稿する</h1>
 <%= form_with model: @text, local:true do |f| %>
   <div class="form-group">
-    <%= f.label :title %>
+    <%= f.label :タイトル %>
     <%= f.text_field :title %>
   </div>
   <div class="form-group">
-    <%= f.label :text %>
+    <%= f.label :本文 %>
     <%= f.text_area :text %>
   </div>
   <div class="form-group">
     <%= f.attachment_field :image %>
+  </div>
+  <div class="form-group">
+    <%= f.label :タグ（※半角カンマを入れることで複数のタグをつけることができます。）%>
+    <%= f.text_field :tag %>
   </div>
   <div class="form-group">
     <%= f.submit '投稿する' %>

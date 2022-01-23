@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'users/unsubscrube'
   get 'users/withdraw'
 
-  resources :texts,only: [:new,:create,:show,:edit,:destroy] do
+  resources :texts,only: [:new,:create,:show,:edit,:destroy,:update] do
     resources :bookmarks,only: [:create,:destroy]
     resources :comments, only: [:create, :destroy]
   end

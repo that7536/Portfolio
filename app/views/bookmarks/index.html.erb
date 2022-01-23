@@ -12,15 +12,7 @@
         <td><%= link_to text.title, text_path(text), class: "text_#{text.id}" %></td>
         <td><%= text.text %></td>
         <td><%= text.comments.count %>件のコメント</td>
-        <td>
-          <!--ブックマーク登録・解除-->
-            <%# if user.bookmarks.where(text_id:text.id).present? %>
-          <%# binding.pry %>
-              <%= link_to "ブックマークから削除", text_bookmark_path(text.id, text.user_id), method: :delete %>
-            <%# else %>
-              <%#= link_to "ブックマークに保存", text_bookmarks_path(text.id), method: :post %>
-            <%# end %>
-        </td>
+        <td><%= link_to "ブックマークから削除", text_bookmark_path(text.id, text.user_id), method: :delete %></td>
       </tr>
     <% end %>
 
