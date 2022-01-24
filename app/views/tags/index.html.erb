@@ -1,0 +1,28 @@
+<h2>タグ一覧(新着順)</h2>
+  <%= link_to "  投稿一覧表示", tags_path(search: "")%><br>
+  <% Tag.all.reverse.each do |tag| %>
+    <%= link_to tags_path(tag_id: tag) do %>
+      <%= tag.name %><br>
+    <% end %>
+  <% end %>
+  <h3>【投稿の検索結果】検索ワード：<%= @content %></h3>
+  <table>
+    <thead>
+      <tr>
+        <th>投稿者名</th>
+        <th>タイトル</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @records.each do |record| %>
+      <tr>
+          <td>
+            <%= record.user.name %><br>
+            <%= attachment_image_tag(record.user, :profileimage, :size =>'100x100', fallback: "no-image-icon.jpg") %>
+          </td>
+          <td><%= link_to record.title, text_path(record) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+

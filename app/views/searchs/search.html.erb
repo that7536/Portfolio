@@ -2,6 +2,7 @@
   <h3>【ユーザーの検索結果】検索ワード：<%= @content %></h3>
   <% @records.each do |user| %>
     <%= link_to user_path(user) do %>
+      <%= attachment_image_tag(user, :profileimage, :size =>'100x100', fallback: "no-image-icon.jpg") %>
       <%= user.name %><br>
     <% end %>
   <% end %>
@@ -28,11 +29,9 @@
     </tbody>
   </table>
 <% else %>
-<h3>【タグの検索結果】検索ワード：<%= @content %></h3>
-  <% @records.each do |tag| %>
-    <%= link_to tag_path(tag) do %>
+  <% Tag.all.each do |tag| %>
+    <%= link_to tags_path(tag_id: tag.id) do %>
       <%= tag.name %><br>
     <% end %>
   <% end %>
-  <%= render 'texts/index',texts: @texts, user: @user %>
 <% end %>

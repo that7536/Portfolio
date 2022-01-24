@@ -4,31 +4,40 @@
     <td>
       <%= attachment_image_tag(@text, :image, :size =>'400x300', fallback: "no-image-icon.jpg") %><br>
     </td>
-    <td>
-      <%= link_to @user.name, user_path(@user) %>
-      <%= attachment_image_tag(@user, :profileimage, :size =>'200x200', fallback: "no-image-icon.jpg") %>
-    </td>
+  </tr>
+  <tr>
     <td><%= @text.text %></td>
+  </tr>
+  <tr>
+    <td>関連タグ</td>
+    <% @text.tags.each do |tag| %>
+      <td><%= link_to tag.name %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <td>
+      <%= attachment_image_tag(@user, :profileimage, :size =>'200x200', fallback: "no-image-icon.jpg") %>
+      <%= link_to @user.name, user_path(@user) %>
+    </td>
+  </tr>
+  <tr>
     <td>コメント数：<%= @text.comments.count %></td>
+  </tr>
     <td>
       <% @text.comments.each do |comment| %>
-        <p><%= attachment_image_tag(comment.user, :profileimage, :size =>'100x100', fallback: "no-image-icon.jpg") %><%= comment.user.name %><%= comment.created_at.strftime('%Y/%m/%d') %></p>
-        <p><%= comment.comment %></p>
+        <%= attachment_image_tag(comment.user, :profileimage, :size =>'70x70', fallback: "no-image-icon.jpg") %><%= comment.user.name %><%= comment.comment %>
         <% if comment.user_id == current_user.id %>
-          <td><%= link_to 'コメントを削除する', text_comment_path(comment.text, comment), method: :delete %></td>
+          <%= link_to 'コメントを削除する', text_comment_path(comment.text, comment), method: :delete %><br>
         <% end %>
       <% end %>
     </td>
-    <td>
-      <p>関連タグ</p>
-      <% @text.tags.each do |tag| %>
-        <p><%= link_to tag.name %></p>
-      <% end %>
-    </td>
+  </tr>
+  <tr>
     <% if @text.user.id == current_user.id %>
       <td><%= link_to '投稿を編集する', edit_text_path(@text) %></td>
       <td><%= link_to '投稿削除', text_path(@text), method: :delete, data: { confirm: '本当に消しますか？' } %></td>
     <% end %>
+  <tr>
     <td>
       <%= form_with(model:[@text,@comment], local: true) do |f| %>
         <%= f.text_area :comment, rows:'5',placeholder: "コメント" %>

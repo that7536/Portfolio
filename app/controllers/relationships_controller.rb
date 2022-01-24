@@ -13,13 +13,13 @@ class RelationshipsController < ApplicationController
   def followings
     @user = User.find(params[:user_id])
     @users = @user.followings
-    @book = Book.new
+    @text = Text.new
   end
 
   def followers
     @user = User.find(params[:user_id])
     @users = @user.followers
-    @book = Book.new
+    @text = Text.new
   end
 
 end

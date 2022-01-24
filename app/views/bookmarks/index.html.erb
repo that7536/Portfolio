@@ -5,8 +5,9 @@
     <% else %>
     <%# binding.pry %>
       <tr id="text_<%= text.id %>">
-        <td><%= link_to text_path(text.id) do %>
-          <%= attachment_image_tag(text.user, :image, :fill, 50, 50, fallback: "no-image-icon.jpg") %>
+        <td>
+          <%= link_to text_path(text.id) do %>
+            <%= attachment_image_tag(text, :image, :fill, 50, 50, fallback: "no-image-icon.jpg") %>
           <% end %>
         </td>
         <td><%= link_to text.title, text_path(text), class: "text_#{text.id}" %></td>

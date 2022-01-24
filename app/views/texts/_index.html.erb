@@ -16,7 +16,7 @@
         <td><%= text.comments.count %>件のコメント</td>
         <td>
           <!--ブックマーク登録・解除-->
-            <% if user.bookmarks.where(text_id:text.id).present? %>
+            <% if current_user.bookmarks.where(text_id:text.id).present? %>
           <%# binding.pry %>
               <%= link_to "ブックマークに保存済み", text_bookmark_path(text.id,text.user_id ), method: :delete %>
             <% else %>

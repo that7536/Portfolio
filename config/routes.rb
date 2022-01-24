@@ -4,22 +4,19 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :users,only: [:show,:edit,:update] do
+  resources :users,only: [:show,:edit,:update,:index] do
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
   end
-  get 'users/unsubscrube'
-  get 'users/withdraw'
 
-  resources :texts,only: [:new,:create,:show,:edit,:destroy,:update] do
+  resources :texts,only: [:new,:create,:show,:edit,:destroy,:update,:index] do
     resources :bookmarks,only: [:create,:destroy]
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [:create,:destroy]
   end
   resources :bookmarks,only: [:index]
 
   get '/search', to: 'searchs#search'
 
-  get 'tags/create'
-  get 'tags/destroy'
+  resources :tags,only: [:index,:create,:destroy]
 end

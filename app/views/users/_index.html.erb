@@ -1,0 +1,18 @@
+    <% user.each do |user| %>
+      <tr>
+        <%= attachment_image_tag(user, :profileimage, :size =>'100x100', fallback: "no-image-icon.jpg") %>
+      </tr>
+      <tr><%= link_to user.name, user_path(user) %></tr>
+      <tr>
+        <td><h3><%= user.introduction %></h3></td>
+        <td>フォロー:<%= user.followings.count %></td>
+        <td>フォロワー:<%= user.followers.count %></td>
+      </tr>
+      <% unless user == current_user %>
+        <% if current_user.following?(user) %>
+          <%= link_to "フォロー済", user_relationships_path(user.id), method: :delete %>
+        <% else %>
+          <%= link_to "フォローする", user_relationships_path(user.id), method: :post %>
+        <% end %>
+      <% end %>
+    <% end %>

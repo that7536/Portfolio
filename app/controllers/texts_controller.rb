@@ -21,7 +21,8 @@ class TextsController < ApplicationController
   end
 
   def index
-    @text = text.all
+    @texts = Text.all
+    @user = @texts.user
   end
 
   def show
