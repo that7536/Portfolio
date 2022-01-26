@@ -1,20 +1,28 @@
-<h1>ブックマーク一覧</h1>
-<% @texts.each do |text| %>
-    <% if text.bookmarks.blank? %>
-<!--url:https://qiita.com/somewhatgood@github/items/b74107480ee3821784e6-->
-    <% else %>
-    <%# binding.pry %>
-      <tr id="text_<%= text.id %>">
-        <td>
-          <%= link_to text_path(text.id) do %>
-            <%= attachment_image_tag(text, :image, :fill, 50, 50, fallback: "no-image-icon.jpg") %>
-          <% end %>
-        </td>
-        <td><%= link_to text.title, text_path(text), class: "text_#{text.id}" %></td>
-        <td><%= text.text %></td>
-        <td><%= text.comments.count %>件のコメント</td>
-        <td><%= link_to "ブックマークから削除", text_bookmark_path(text.id, text.user_id), method: :delete %></td>
-      </tr>
+<div class='container'>
+  <div class='row'>
+    <h1>ブックマーク一覧</h1>
+    <% @texts.each do |text| %>
+      <% if text.bookmarks.blank? %>
+      <% else %>
+        <table>
+          <tr id="text_<%= text.id %>">
+            <td>
+              <%= link_to text_path(text.id) do %>
+              <%= attachment_image_tag(text, :image, :size =>'400x300', fallback: "no-image-icon.jpg") %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to user_path(text.user.id) do %>
+                <%= attachment_image_tag(text.user, :profileimage, :size =>'100x100', fallback: "no-image-icon.jpg") %>
+              <% end %>
+            </td>
+            <td><%= link_to text.title, text_path(text), class: "text_#{text.id}" %></td>
+            <td><%= text.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= text.comments.count %>件のコメント</td>
+            <td><%= link_to "ブックマークから削除", text_bookmark_path(text.id, text.user_id), method: :delete %></td>
+          </tr>
+        </table>
+      <% end %>
     <% end %>
-
-<% end %>
+  </div>
+</div>

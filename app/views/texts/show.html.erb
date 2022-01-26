@@ -1,50 +1,55 @@
-<h1><%= @text.title %></h1>
-<table class='table'>
-  <tr id="text_<%= @text.id %>">
-    <td>
-      <%= attachment_image_tag(@text, :image, :size =>'400x300', fallback: "no-image-icon.jpg") %><br>
-    </td>
-  </tr>
-  <tr>
-    <td><%= @text.text %></td>
-  </tr>
-  <tr>
-    <td>関連タグ</td>
-    <% @text.tags.each do |tag| %>
-      <td><%= link_to tag.name %></td>
-    <% end %>
-  </tr>
-  <tr>
-    <td>
-      <%= attachment_image_tag(@user, :profileimage, :size =>'200x200', fallback: "no-image-icon.jpg") %>
-      <%= link_to @user.name, user_path(@user) %>
-    </td>
-  </tr>
-  <tr>
-    <td>コメント数：<%= @text.comments.count %></td>
-  </tr>
-    <td>
-      <% @text.comments.each do |comment| %>
-        <%= attachment_image_tag(comment.user, :profileimage, :size =>'70x70', fallback: "no-image-icon.jpg") %><%= comment.user.name %><%= comment.comment %>
-        <% if comment.user_id == current_user.id %>
-          <%= link_to 'コメントを削除する', text_comment_path(comment.text, comment), method: :delete %><br>
+<div class='container'>
+  <div class='row'>
+    <h1><%= @text.title %></h1>
+    <%= render 'layouts/error', obj: @comment %>
+    <table class='table'>
+      <tr id="text_<%= @text.id %>">
+        <th>
+          <%= attachment_image_tag(@text, :image, :size =>'400x300', fallback: "no-image-icon.jpg") %><br>
+        </th>
+      </tr>
+      <tr>
+        <th><%= @text.text %></th>
+      </tr>
+      <tr>
+        <th>関連タグ</th>
+        <% @text.tags.each do |tag| %>
+          <th><%= link_to tag.name %></th>
         <% end %>
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <% if @text.user.id == current_user.id %>
-      <td><%= link_to '投稿を編集する', edit_text_path(@text) %></td>
-      <td><%= link_to '投稿削除', text_path(@text), method: :delete, data: { confirm: '本当に消しますか？' } %></td>
-    <% end %>
-  <tr>
-    <td>
-      <%= form_with(model:[@text,@comment], local: true) do |f| %>
-        <%= f.text_area :comment, rows:'5',placeholder: "コメント" %>
-        <%= f.submit "送信する" %>
-      <% end %>
-    </td>
-
-  </tr>
-
-</table>
+      </tr>
+      <tr>
+        <th>
+          <%= attachment_image_tag(@user, :profileimage, :size =>'200x200', fallback: "no-image-icon.jpg") %>
+          <%= link_to @user.name, user_path(@user) %>
+        </th>
+      </tr>
+      <tr>
+        <th>コメント数：<%= @text.comments.count %></th>
+      </tr>
+        <th>
+          <% @text.comments.each do |comment| %>
+            <%= attachment_image_tag(comment.user, :profileimage, :size =>'70x70', fallback: "no-image-icon.jpg") %>
+            <%= comment.user.name %>
+            <%= comment.comment %>
+              <% if comment.user_id == current_user.id %>
+                <%= link_to 'コメントを削除する', text_comment_path(comment.text, comment), method: :delete %><br>
+            <% end %>
+          <% end %>
+        </th>
+      </tr>
+      <tr>
+        <% if @text.user.id == current_user.id %>
+          <th><%= link_to '投稿を編集する', edit_text_path(@text) %></td>
+          <th><%= link_to '投稿削除', text_path(@text), method: :delete, data: { confirm: '本当に消しますか？' } %></td>
+        <% end %>
+      <tr>
+        <th>
+          <%= form_with(model:[@text,@comment], local: true) do |f| %>
+            <%= f.text_area :comment, rows:'5',placeholder: "コメント" %>
+            <%= f.submit "送信する" %>
+          <% end %>
+        </th>
+      </tr>
+    </table>
+  </div>
+</div>

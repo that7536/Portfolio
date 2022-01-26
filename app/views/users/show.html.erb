@@ -1,41 +1,44 @@
 <div class="container">
-  <div>
-    <tr>
-      <%= attachment_image_tag(@user, :profileimage, :size =>'200x200', fallback: "no-image-icon.jpg") %>
-      <h2><%= link_to @user.name, user_path(@user) %></h2>
-    </tr>
-    <tr>
-      <td><h4><%= @user.introduction %></h4></td>
-    </tr>
-    <tr>
-      <td>
-        <%= link_to  user_followings_path(@user.id) do %>
-          フォロー:<%= @user.followings.count %>
+  <div class='row'>
+    <table>
+      <tr>
+        <%= attachment_image_tag(@user, :profileimage, :size =>'200x200', fallback: "no-image-icon.jpg") %>
+        <h1><%= link_to @user.name, user_path(@user) %></h1>
+      </tr>
+      <tr>
+        <td><h4><%= @user.introduction %></h4></td>
+      </tr>
+      <tr>
+        <td>
+          <%= link_to  user_followings_path(@user.id) do %>
+            フォロー:<%= @user.followings.count %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to user_followers_path(@user.id) do %>
+            フォロワー:<%= @user.followers.count %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <% unless @user == current_user %>
+          <% if current_user.following?(@user) %>
+            <td><%= link_to "フォロー済", user_relationships_path(@user.id), method: :delete %></td>
+          <% else %>
+            <td><%= link_to "フォローする", user_relationships_path(@user.id), method: :post %></td>
+          <% end %>
         <% end %>
-      </td>
-      <td>
-        <%= link_to user_followers_path(@user.id) do %>
-          フォロワー:<%= @user.followers.count %>
+      </tr>
+      <tr>
+        <% if @user == current_user %>
+          <td><%= link_to 'ブックマーク',bookmarks_path %></td>
+          <td><%= link_to 'ユーザー設定', edit_user_path(@user) %></td>
         <% end %>
-      </td>
-    </tr>
-    <tr>
-      <% unless @user == current_user %>
-        <% if current_user.following?(@user) %>
-          <td><%= link_to "フォロー済", user_relationships_path(@user.id), method: :delete %></td>
-        <% else %>
-          <td><%= link_to "フォローする", user_relationships_path(@user.id), method: :post %></td>
-        <% end %>
-      <% end %>
-    </tr>
-    <tr>
-      <% if @user == current_user %>
-        <td><%= link_to 'ブックマーク',bookmarks_path %></td>
-        <td><%= link_to 'ユーザー設定', edit_user_path(@user) %></td>
-      <% end %>
-    </tr>
+      </tr>
+    </table>
+    <div class='blog-index'>
+      <h2><%= @user.name %>の投稿</h2>
+      <%= render 'texts/index',texts: @texts, user: current_user %>
+    </div>
   </div>
 </div>
-<h2>投稿</h2>
-<%= render 'texts/index',texts: @texts, user: current_user %>
-

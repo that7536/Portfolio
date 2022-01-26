@@ -1,3 +1,28 @@
-<h1>Texts#index</h1>
-
-  <%= render 'index',texts: @texts, user: @user %>
+<div class='container'>
+  <div class='row'>
+    <h1>投稿一覧(新着順)</h1>
+    <table class='table table-hover table-inverse'>
+      <tbody>
+        <% @texts.reverse.each do |text| %>
+          <tr id="text_<%= text.id %>">
+            <td>
+              <%= link_to text_path(text.id) do %>
+                <%= attachment_image_tag(text, :image, :size =>'200x150', fallback: "no-image-icon.jpg") %>
+              <% end %>
+            </td>
+            <td><%= link_to text.title, text_path(text), class: "text_#{text.id}" %></td>
+            <td>
+              <!--ブックマーク登録・解除-->
+                <% if current_user.bookmarks.where(text_id:text.id).present? %>
+              <%# binding.pry %>
+                  <%= link_to "ブックマークに保存済み", text_bookmark_path(text.id,text.user_id ), method: :delete %>
+                <% else %>
+                  <%= link_to "ブックマークに保存", text_bookmarks_path(text.id), method: :post %>
+                <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

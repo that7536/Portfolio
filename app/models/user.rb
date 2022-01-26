@@ -22,8 +22,8 @@ class User < ApplicationRecord
   #アソシエーションについて、現状では理解ができなくなったときにもうちょっとわかりやすいアソシエーションにできるかも、、
   #以下、記事のurl
   #https://sakaishun.com/2021/03/20/classname-source/
-  
-  
+
+   validates :name, presence: true, length: {maximum: 16}
 
   # フォローしたときの処理
   def follow(user_id)

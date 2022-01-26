@@ -17,7 +17,7 @@
     </thead>
     <tbody>
       <% @records.each do |record| %>
-      <tr>
+        <tr>
           <td>
             <%= link_to record.user.name, text_path(record) %><br>
             <%= attachment_image_tag(record.user, :profileimage, :size =>'100x100', fallback: "no-image-icon.jpg") %>

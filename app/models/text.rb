@@ -12,6 +12,10 @@ class Text < ApplicationRecord
 
   belongs_to :user
 
+  validates :title, presence: true, length: {maximum: 64}
+  validates :text, presence: true, length: {maximum: 255}
+
+
   def save_tag(sent_tags)
   # タグが存在していれば、タグの名前を配列として全て取得
     current_tags = self.tags.pluck(:name) unless self.tags.nil?

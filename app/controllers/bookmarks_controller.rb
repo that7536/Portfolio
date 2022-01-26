@@ -5,6 +5,7 @@ class BookmarksController < ApplicationController
    # @texts = Text.where(id: current_user.bookmarks.pluck(:id))
     #@texts = current_user.bookmarks
     @texts = Text.all
+    @text = current_user.texts
     #binding.pry
 
 
@@ -23,7 +24,7 @@ class BookmarksController < ApplicationController
 
   def destroy
 
-    bookmark = Bookmark.find_by(user_id: params[:id], text_id: params[:text_id])
+    bookmark = Bookmark.find_by(params[:id], text_id: params[:text_id])
     bookmark.destroy
     redirect_back(fallback_location: root_path)
   end
