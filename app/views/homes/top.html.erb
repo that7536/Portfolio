@@ -1,6 +1,5 @@
 <div class="container">
   <div class='row'>
-    <h1>The Old Gang</h1>
     <h4>
       The Old Gangは古いアーケードゲームを専門に扱う情報共有サイトです。</br>
       個人・商業の方など、どなたでもご利用いただけます。
@@ -42,12 +41,10 @@
       </table>
 
     <% else %>
-    <table>
-      <tr>
+      <div>
         <h2><%= link_to '新規登録', new_user_registration_path,class: 'fas fa-user-plus nav-link' %></h2>
         <h2><%= link_to 'ログイン', new_user_session_path ,class: 'fas fa-sign-in-alt nav-link'%></h2>
-      </tr>
-    </table>
+      </div>
     <% end %>
   </div>
 </div>
