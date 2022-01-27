@@ -14,11 +14,11 @@
       <td class=form-text><%= f.attachment_field :image %></td>
     </tr>
     <tr class="form-group">
-      <th class=form-name><%= f.label :タグ（※半角カンマを入れることで複数のタグをつけることができます。）%><</th>
+      <th class=form-name><%= f.label :タグ（※半角カンマを入れることで複数のタグをつけることができます。）%></th>
       <td class=form-text><%= f.text_field :tag %></td>
     </tr>
     <tr class="form-group">
-      <%= f.submit '投稿する' %>
+      <td><%= f.submit '投稿する' %></td>
     </tr>
   </table>
 <% end %>

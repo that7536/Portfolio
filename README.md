@@ -20,7 +20,7 @@
 
 
 ### ターゲットユーザ
- 
+
 20～40代の主に男性の方
 
 
@@ -32,7 +32,7 @@
 
 ## 設計書
 
-<...>
+https://docs.google.com/spreadsheets/d/1k6NSFoA00tb2uaJnH-zT3vaiwAUohZRd635MCZUFrpE/edit?usp=sharing
 
 
 ## チャレンジ要素一覧
