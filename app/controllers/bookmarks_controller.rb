@@ -12,10 +12,12 @@ class BookmarksController < ApplicationController
   end
 
   def create
+    @text = Text.find(params[:text_id])
     bookmark = Bookmark.new(text_id:params[:text_id])
     bookmark.user_id = current_user.id
     bookmark.save
-    redirect_back(fallback_location: root_path)
+    #非同期通信のためredirectを削除
+    #redirect_back(fallback_location: root_path)
   end
 
   def bookmark_params
@@ -23,10 +25,11 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-
+    @text = Text.find(params[:text_id])
     bookmark = Bookmark.find_by(params[:id], text_id: params[:text_id])
     bookmark.destroy
-    redirect_back(fallback_location: root_path)
+    #非同期通信のためredirectを削除
+    #redirect_back(fallback_location: root_path)
   end
 
   private

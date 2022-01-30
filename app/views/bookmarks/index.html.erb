@@ -19,7 +19,14 @@
             <td><%= link_to text.title, text_path(text), class: "text_#{text.id}" %></td>
             <td><%= text.created_at.strftime('%Y/%m/%d') %></td>
             <td><%= text.comments.count %>件のコメント</td>
-            <td><%= link_to "ブックマークから削除", text_bookmark_path(text.id, text.user_id), method: :delete %></td>
+            <td id="bookmark_buttons_<%= text.id %>">
+              <% if current_user.bookmarks.where(text_id:text.id).present? %>
+                <%= link_to "ブックマークから削除", text_bookmark_path(text.id,text.user_id ), method: :delete, remote: true %>
+              <% else %>
+                <%= link_to "ブックマークに保存", text_bookmarks_path(text.id), method: :post, remote: true %>
+              <% end %>
+              <%#= link_to "ブックマークから削除", text_bookmark_path(text.id, text.user_id), method: :delete, remote: true %>
+            </td>
           </tr>
         </table>
       <% end %>

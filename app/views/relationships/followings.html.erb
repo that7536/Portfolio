@@ -2,7 +2,17 @@
   <div>
     <div>
       <h2>フォロー一覧</h2>
-      <%= render 'users/index',user: @users %>
+      <% @users.each do |user| %>
+        <tr>
+          <%= attachment_image_tag(user, :profileimage, :size =>'100x100', fallback: "no-image-icon.jpg") %>
+        </tr>
+        <tr><%= link_to user.name, user_path(user) %></tr>
+        <tr>
+          <td><h3><%= user.introduction %></h3></td>
+          <td>フォロー:<%= user.followings.count %></td>
+          <td>フォロワー:<%= user.followers.count %></td>
+        </tr>
+      <% end %>
     </div>
   </div>
 </div>
