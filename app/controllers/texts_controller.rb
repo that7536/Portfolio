@@ -13,6 +13,10 @@ class TextsController < ApplicationController
     end
     if @text.save
       @text.save_tag(tag_list)
+      tags = Vision.get_image_data(@text.image)
+      tags.each do |tag|
+        @text.tags.create(name: tag)
+      end
       redirect_to user_path(current_user), notice: "新規投稿完了！"
     else
       render 'texts/new'

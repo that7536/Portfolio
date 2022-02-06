@@ -2,7 +2,8 @@ class TagsController < ApplicationController
 
   def index
     @records = Text.all
-
+    @tags = Tag.all
+    @tags = Tag.page(params[:page]).per(10)
 
     if params[:search].present?
       @records = Text.joins(:tags).where("tags.name like '%#{params[:search]}%'").order(created_at: :desc)

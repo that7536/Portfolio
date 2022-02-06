@@ -1,10 +1,11 @@
 <h2>タグ一覧(新着順)</h2>
   <%= link_to "  投稿一覧表示", tags_path(search: "")%><br>
-  <% Tag.all.reverse.each do |tag| %>
+  <% @tags.reverse.each do |tag| %>
     <%= link_to tags_path(tag_id: tag) do %>
       <%= tag.name %><br>
     <% end %>
   <% end %>
+  <%= paginate @tags %>
   <h3>【投稿の検索結果】検索ワード：<%= @content %></h3>
   <table>
     <thead>

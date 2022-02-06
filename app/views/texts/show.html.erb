@@ -14,7 +14,7 @@
       <tr>
         <th>関連タグ</th>
         <% @text.tags.each do |tag| %>
-          <th><%= link_to tag.name %></th>
+          <th><%= link_to tag.name, tags_path(tag_id: tag) %></th>
         <% end %>
       </tr>
       <tr id="text_<%= @text.id %>">
