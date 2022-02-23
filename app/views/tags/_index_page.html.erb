@@ -1,0 +1,11 @@
+  <div>
+    <li><%= link_to "  投稿一覧表示", tags_path(search: "")%><br></li>
+    <% @tags.reverse.each do |tag| %>
+      <li>
+        <%= link_to tags_path(tag_id: tag) do %>
+          <%= tag.name %><br>
+        <% end %>
+      </li>
+    <% end %>
+    <div><%= paginate @tags, remote: true %></div>
+  </div>

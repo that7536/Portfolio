@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   get '/search', to: 'searchs#search'
 
   resources :tags,only: [:index,:create,:destroy]
+  get '/search_tags', to: 'tags#search'
 end
