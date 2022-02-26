@@ -26,11 +26,23 @@ header {
 footer {
   width: 100%;
   height: 100px;
+  padding: 40px 0 0;
+}
+
+sidebar {
+  width: 170px;
+  background-color: #bbbbff;
+}
+
+.sidebar-text {
+  color: black;
+  margin-top: 10px;
 }
 
 .footer-text {
   text-align: center;
 }
+
 
 .form-group {
   width: 100%;

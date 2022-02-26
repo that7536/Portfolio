@@ -18,7 +18,7 @@ class TagsController < ApplicationController
   end
 
   def index
-    @tags = Tag.page(params[:page]).per(10)
+    @tags = Tag.page(params[:page]).per(20)
   end
 
   private

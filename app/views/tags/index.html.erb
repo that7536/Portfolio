@@ -1,12 +1,17 @@
-<h2>タグ一覧(新着順)</h2>
-      <div>
-        <li><%= link_to "  投稿一覧表示", search_tags_path(search: "")%><br></li>
-        <% @tags.reverse.each do |tag| %>
-          <li>
-            <%= link_to search_tags_path(tag_id: tag) do %>
-              <%= tag.name %><br>
-            <% end %>
-          </li>
-        <% end %>
-        <%= paginate @tags %>
-      </div>
+<div class="container">
+  <div class="row">
+    <h2>タグ一覧(新着順)</h2>
+  </div>
+  <div class="row">
+    <div class="col-10">
+      <% @tags.reverse.each do |tag| %>
+        <li>
+          <%= link_to search_tags_path(tag_id: tag) do %>
+            <%= tag.name %><br>
+          <% end %>
+        </li>
+      <% end %>
+      <%= paginate @tags %>
+    </div>
+  </div>
+</div>
