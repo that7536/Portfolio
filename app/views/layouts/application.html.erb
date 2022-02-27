@@ -10,8 +10,8 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <body class="d-flex flex-column vh-100">
-    <header >
+  <body>
+    <header class="d-flex flex-column">
       <div>
         <div>
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -19,10 +19,12 @@
             <div class="collapsee" id="navbarNavDropdown">
               <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
-                <li><%= link_to 'マイページへ',user_path(current_user),class: 'fas fa-home nav-link text-light' %></li>
-                <li><%= link_to '新規投稿',new_text_path,class: 'fas fa-home nav-link text-light' %></li>
-                <li><%= link_to 'タグ一覧',tags_path,class: 'fas fa-home nav-link text-light' %></li>
-                <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: 'fas fa-sign-out-alt nav-link text-light' %></li>
+                <div class="head-content">
+                  <li><%= link_to 'マイページへ',user_path(current_user),class: 'fas fa-home nav-link text-light' %></li>
+                  <li><%= link_to '新規投稿',new_text_path,class: 'fas fa-home nav-link text-light' %></li>
+                  <li><%= link_to 'タグ一覧',tags_path,class: 'fas fa-home nav-link text-light' %></li>
+                  <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: 'fas fa-sign-out-alt nav-link text-light' %></li>
+                </div>
                 <li class= 'fas fa-sign-out-alt nav-link text-light'><%= render 'searchs/form' %></li>
               <% else %>
               <% end %>
@@ -32,22 +34,24 @@
         </div>
       </div>
     </header>
-    <main class="d-flex">
-      <% if user_signed_in? %>
-        <sidebar>
-          <div class="collapsee" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-              <li><%= link_to 'マイページへ',user_path(current_user),class: 'fas fa-home nav-link sidebar-text' %></li>
-              <li><%= link_to '新規投稿',new_text_path,class: 'fas fa-home nav-link sidebar-text' %></li>
-              <li><%= link_to 'タグ一覧',tags_path,class: 'fas fa-home nav-link sidebar-text' %></li>
-              <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: 'fas fa-sign-out-alt nav-link sidebar-text' %></li>
-            </ul>
+    <main class="flex-low">
+      <%# if 画面幅Small(768px)未満で非表示 do %>
+        <% if user_signed_in? %>
+          <div class="side-content">
+            <div class="collapsee sidebar" id="navbarNavDropdown">
+              <ul class="navbar-nav ml-auto">
+                <li><%= link_to 'マイページへ',user_path(current_user),class: 'fas fa-home nav-link sidebar-text' %></li>
+                <li><%= link_to '新規投稿',new_text_path,class: 'fas fa-home nav-link sidebar-text' %></li>
+                <li><%= link_to 'タグ一覧',tags_path,class: 'fas fa-home nav-link sidebar-text' %></li>
+                <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete,class: 'fas fa-sign-out-alt nav-link sidebar-text' %></li>
+              </ul>
+            </div>
           </div>
-        </sidebar>
-      <% end %>
-      <main-visual>
+        <% end %>
+      <%# end %>
+      <div class="main-visual">
         <%= yield %>
-      </main-visual>
+      </div>
     </main>
     <footer>
       <nav class="">
