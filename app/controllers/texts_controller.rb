@@ -12,12 +12,17 @@ class TextsController < ApplicationController
       tag_list = []
     end
     if @text.save
-      tags = Vision.get_image_data(@text.image)
-      tag_list.push(tags)
-#      tags.each do |tag|
-#        @text.tags.create(name: tag)
-#      end
-      @text.save_tag(tag_list.uniq)
+      if @text.image.nil?
+
+      else
+        tags = Vision.get_image_data(@text.image)
+        tag_list.push(tags)
+#        tags.each do |tag|
+#          @text.tags.create(name: tag)
+#        end
+        @text.save_tag(tag_list.uniq)
+      end
+
 
       redirect_to user_path(current_user), notice: "新規投稿完了！"
     else
