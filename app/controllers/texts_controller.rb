@@ -23,7 +23,6 @@ class TextsController < ApplicationController
         @text.save_tag(tag_list.uniq)
       end
 
-
       redirect_to user_path(current_user), notice: "新規投稿完了！"
     else
       render 'texts/new'

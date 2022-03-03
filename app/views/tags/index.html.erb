@@ -3,7 +3,7 @@
     <h2>タグ一覧(新着順)</h2>
   </div>
   <div class="row">
-    <div class="col-10">
+    <ul>
       <% @tags.reverse.each do |tag| %>
         <li>
           <%= link_to search_tags_path(tag_id: tag) do %>
@@ -12,6 +12,6 @@
         </li>
       <% end %>
       <%= paginate @tags %>
-    </div>
+    </ul>
   </div>
 </div>

@@ -3,24 +3,28 @@
   <div class='row'>
     <div class="col-10">
       <table>
-        <thead>
-          <tr>
-            <th>投稿者名</th>
-            <th>タイトル</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @records.each do |record| %>
-            <tr class='tag-lists-box'>
-                <td class='tag-lists'>
-                <%= link_to record.user.name, user_path(record.user.id) %><br>
-                <%= attachment_image_tag(record.user, :profileimage, :size =>'100x100', fallback: "no-image-icon.jpg") %>
-              </td>
-              <td class='tag-lists'><%= link_to record.title, text_path(record) %></td>
+        <% if @records.empty? %>
+          <h4>'<%= @content %>'を含む投稿はありません。</h4>
+        <% else %>
+          <thead>
+            <tr>
+              <th>投稿者名</th>
+              <th>タイトル</th>
             </tr>
-          <% end %>
-          <td><%= paginate @records %></td>
-        </tbody>
+          </thead>
+          <tbody>
+            <% @records.each do |record| %>
+              <tr class='tag-lists-box'>
+                  <td class='tag-lists'>
+                  <%= link_to record.user.name, user_path(record.user.id) %><br>
+                  <%= attachment_image_tag(record.user, :profileimage, :size =>'100x100', fallback: "no-image-icon.jpg") %>
+                </td>
+                <td class='tag-lists'><%= link_to record.title, text_path(record) %></td>
+              </tr>
+            <% end %>
+            <td><%= paginate @records %></td>
+          </tbody>
+        <% end %>
       </table>
     </div>
   </div>
