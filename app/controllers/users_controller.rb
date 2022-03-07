@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @texts = @user.texts
+    @texts = @user.texts.all.page(params[:page]).per(20)
     @text = Text.new
   end
 
