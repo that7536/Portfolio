@@ -4,7 +4,7 @@ class BookmarksController < ApplicationController
     #@user =  @user = User.find(params[:user_id])
    # @texts = Text.where(id: current_user.bookmarks.pluck(:id))
     #@texts = current_user.bookmarks
-    @texts = Text.all.page(params[:page]).per(20)
+    @texts = Text.all.page(params[:page]).per(10)
     @text = current_user.texts
     #binding.pry
 

@@ -31,7 +31,7 @@ class TextsController < ApplicationController
   end
 
   def index
-    @texts = Text.all.page(params[:page]).per(20)
+    @texts = Text.all.page(params[:page]).per(10)
   end
 
   def show
